@@ -1,5 +1,5 @@
-const AwesomeCoin = artifacts.require("AwesomeCoin");
+const AwesomeCoin = artifacts.require("./AwesomeCoin");
 
 module.exports = function(deployer) {
-  deployer.deploy(AwesomeCoin);
+  deployer.deploy(AwesomeCoin, 1000000);
 };
