@@ -6,7 +6,7 @@ contract AwesomeCoin {
 	string  public standard = "Awesome Coin v1.0";
 	uint256 public totalSupply;
 	mapping(address => uint256) public balanceOf;
-	mapping(address => mapping(address => uint256)) public allowance;
+    mapping(address => mapping(address => uint256)) public allowance;
 	event Transfer(
         address indexed _from,
         address indexed _to,
@@ -24,7 +24,7 @@ contract AwesomeCoin {
     }
 
     function transfer(address _to, uint256 _value) public returns (bool success) {
-        require(balanceOf[msg.sender] >= _value);
+        require(_value <= balanceOf[msg.sender]);
 
         balanceOf[msg.sender] -= _value;
         balanceOf[_to] += _value;

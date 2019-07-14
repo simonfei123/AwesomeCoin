@@ -1,4 +1,4 @@
-var AwesomeCoin = artifacts.require("./AwesomeCoin.sol");
+const AwesomeCoin = artifacts.require("./AwesomeCoin.sol");
 
 contract('AwesomeCoin', function(accounts){
 	var tokenInstance;
@@ -34,9 +34,9 @@ contract('AwesomeCoin', function(accounts){
     return AwesomeCoin.deployed().then(function(instance) {
       tokenInstance = instance;
       // Test `require` statement first by transferring something larger than the sender's balance
-      return tokenInstance.transfer.call(accounts[1], 99999999999999999999999);
+      return tokenInstance.transfer.call(accounts[1], uint256(99999999));
     }).then(assert.fail).catch(function(error) {
-      //assert(error.message.indexOf('revert') >= 0, 'error message must contain revert');
+      assert(error.message.indexOf('revert') >= 0, 'error message must contain revert');
       return tokenInstance.transfer.call(accounts[1], 250000, { from: accounts[0] });
     }).then(function(success) {
       assert.equal(success, true, 'it returns true');
